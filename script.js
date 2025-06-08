@@ -172,14 +172,24 @@ function validatePassword() {
         } else {
             passwordInput.style.borderColor = "green";
         }
-        //onEnter key press
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === "Enter") {
-                signIn.click();
-            }
-        });
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
     validatePassword();
+});
+
+function enteKeyPress() {
+    const btn = document.querySelector('.signIn');
+    const passInp = document.getElementById('passInp');
+
+    passInp.addEventListener('keypress', (e) => {
+        if (e.key === "Enter") {
+            btn.click();
+        }
+    });
+}
+
+// Call enteKeyPress when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    enteKeyPress();
 });
