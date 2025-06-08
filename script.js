@@ -133,3 +133,53 @@ function togglePasswordVisibility() {
 document.addEventListener('DOMContentLoaded', () => {
     togglePasswordVisibility();
 });
+
+function validatePassword() {
+    const passwordInput = document.getElementById('passInp');
+    const signIn = document.querySelector('.signIn');
+    
+
+    signIn.addEventListener('click', (e) => {
+        const password = passwordInput.value.trim();
+        const placeHolder = document.getElementById('passWordPlaceholder');
+        if (password === "") {
+            passwordInput.style.borderColor = "var(--error-color)";
+            passwordInput.classList.add('shake');
+            placeHolder.classList.add('shake');
+            placeHolder.style.color = "var(--error-color)";
+            if ("vibrate" in navigator) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            setTimeout(() => {
+                passwordInput.classList.remove('shake');
+                placeHolder.classList.remove('shake');
+            }, 300);
+            e.preventDefault();
+        } else if (password.length < 8) {
+            passwordInput.style.borderColor = "var(--error-color)";
+            passwordInput.classList.add('shake');
+            placeHolder.classList.add('shake');
+            placeHolder.style.color = "var(--error-color)";
+            if ("vibrate" in navigator) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            setTimeout(() => {
+                passwordInput.classList.remove('shake');
+                placeHolder.classList.remove('shake');
+            }, 300);
+            e.preventDefault();
+
+        } else {
+            passwordInput.style.borderColor = "green";
+        }
+        //onEnter key press
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === "Enter") {
+                signIn.click();
+            }
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    validatePassword();
+});
