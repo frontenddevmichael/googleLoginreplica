@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google</title>
+  <link rel="icon" type="x-icon" href="google (1).png">
+  <link rel="stylesheet" href="style.css">
+  <script src="/script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="general">
+    <div class="logo">
+      <img src="google (1).png" alt="Google" style="width:2rem ;aspect-ratio: 1/1;">
+      <p id="usrId"></p>
+    </div>
+    <p style="font-family: var(--font-family); font-weight: 400; font-size: var(--font-size-lg);margin-left: var(--spacing-lg);"
+      id="header">
+      Sign in</p>
+    <p style="font-family: var(--font-family); font-weight: 350; font-size: var(--font-size-md);margin-bottom: .5rem;margin-left: var(--spacing-lg);"
+      id="instruction">
+      Use
+      your google
+      account</p>
+    <div class="form">
+      <div class="login">
+        <div class="eMail">
+          <input type="email" id="emailInp" placeholder=" ">
+          <div class="placeHolder">Email or Phone</div>
+        </div>
+        <a href="#" id="frgPass">Forgot
+          email?</a>
+        <p class="privacy-text">Not
+          your
+          Computer? use private
+          window to sign in. <br> <a href="#" class="privacy-link">Learn
+            more</a></p>
+        <div class="btns">
+          <button id="crtBtn">Create account</button>
+          <button id="nxtBtn">Next</button>
+        </div>
+      </div>
+      <div class="lgCntd">
+        <div class="passWord">
+          <input type="password" id="passInp" placeholder=" ">
+          <div class="placeHolder">Password</div>
+          <i class="fa fa-eye-slash" id="tgBtn"></i>
+        </div>
+        <a href="#" style="color: var(--primary-color);">Forgot Password?</a>
+        <div class="btn"
+          style="display: flex;justify-content: space-between;width: 90%; justify-self: center;margin-top: var(--spacing-2xl);">
+          <button id="goBack">Go back</button>
+          <button class="signIn">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

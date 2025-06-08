@@ -1,0 +1,728 @@
+:root {
+        --primary-color: #1a73e8;
+        /* Google blue */
+        --secondary-color: #202124;
+        /* Dark text for light mode */
+        --border-color: #dadce0;
+        /* Light gray border */
+        --background-color: #ffffff;
+        /* White background */
+        --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        --font-size-lg: 1.25rem;
+        /* 20px converted to rem */
+        --font-size-md: 0.875rem;
+        /* 14px converted to rem */
+        --font-size-sm: 0.75rem;
+        /* 12px converted to rem */
+        --error-color: #d93025;
+        /* Google red */
+        --input-bg: #ffffff;
+        /* White input background */
+        --input-focus-border: #1a73e8;
+        /* Google blue for focus */
+
+        /* Light mode variables */
+        --text-primary: #202124;
+        /* Dark text on light background */
+        --text-secondary: #5f6368;
+        /* Medium gray for secondary text */
+        --surface-color: #ffffff;
+        /* White surface backgrounds */
+        --hover-color: #f8f9fa;
+        /* Light gray hover states */
+        --success-color: #137333;
+        /* Success green for light mode */
+        --warning-color: #f29900;
+        /* Warning orange for light mode */
+
+        /* Spacing system for consistency */
+        --spacing-xs: 0.3125rem;
+        /* 5px */
+        --spacing-sm: 0.625rem;
+        /* 10px */
+        --spacing-md: 0.9375rem;
+        /* 15px */
+        --spacing-lg: 1.25rem;
+        /* 20px */
+        --spacing-xl: 1.875rem;
+        /* 30px */
+        --spacing-2xl: 2.1875rem;
+        /* 35px */
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #f8f9fa;
+    }
+
+    * {
+        font-family: var(--font-family);
+        padding: 0;
+        margin: 0;
+        color: var(--text-primary);
+        box-sizing: border-box;
+        /* Better box model */
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--background-color);
+        min-height: 100vh;
+        /* Use vh instead of fixed height */
+        padding: 1rem;
+        /* Add padding for mobile */
+    }
+
+    .general {
+        position: relative;
+        padding: var(--spacing-md);
+        width: 100%;
+        max-width: 25rem;
+        min-height: 55vh;
+        border-radius: 0.5rem;
+        background-color: var(--surface-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .form {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: var(--spacing-sm);
+        width: 100%;
+        height: calc(100% - var(--spacing-sm));
+        /* Calculate remaining height */
+        overflow: hidden;
+    }
+
+    .login {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: left 0.3s ease;
+    }
+
+    .lgCntd {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .login.showPg2 {
+        left: -100%;
+    }
+
+    .lgCntd.showPg2 {
+        left: 0%;
+        opacity: 1;
+    }
+
+    #emailInp {
+        margin: auto;
+        width: 90%;
+        height: 3.2rem;
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        border: 2px solid var(--border-color);
+        outline: none;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-md);
+        transition: all 0.2s ease;
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+    }
+
+    #emailInp:focus+.placeHolder,
+    #emailInp:not(:placeholder-shown)+.placeHolder {
+        transform: translateY(-1.5625rem) scale(0.8);
+        /* -25px to rem */
+        color: var(--primary-color);
+        background-color: var(--surface-color);
+    }
+
+    .pHactive {
+        transform: translateY(-1.5625rem) scale(0.8);
+        /* -25px to rem */
+        color: var(--primary-color);
+        background-color: var(--surface-color);
+        transition: all 0.3s ease;
+    }
+
+    #emailInp:focus {
+        border: 2px solid var(--input-focus-border);
+    }
+
+    .eMail {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-top: var(--spacing-lg);
+    }
+
+    #passInp {
+        margin: auto;
+        width: 90%;
+        height: 3.2rem;
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        border: 2px solid var(--border-color);
+        outline: none;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-md);
+        transition: all 0.2s ease;
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+    }
+
+    #passInp:focus~.placeHolder,
+    #passInp:not(:placeholder-shown)+.placeHolder {
+        transform: translateY(-1.5625rem);
+        /* -25px to rem */
+        color: var(--primary-color);
+        background-color: var(--surface-color);
+    }
+
+    #passInp:focus {
+        border: 2px solid var(--input-focus-border);
+    }
+
+    .passWord {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        margin-top: var(--spacing-lg);
+    }
+
+    .placeHolder {
+        color: var(--text-secondary);
+        position: absolute;
+        white-space: nowrap;
+        left: 1.875rem;
+        /* 30px to rem */
+        font-size: 1rem;
+        padding: 0 0.3125rem;
+        /* 5px to rem */
+        pointer-events: none;
+        border-radius: 0.625rem;
+        /* 10px to rem */
+        transition: all 0.2s ease-in-out;
+    }
+
+    a {
+        position: relative;
+        top: 0.3125rem;
+        /* 5px to rem */
+        left: 1.5625rem;
+        /* 25px to rem */
+        text-align: left;
+        text-decoration: none;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 2s ease;
+    }
+
+    a::after {
+        content: "";
+        position: absolute;
+        height: 0.15rem;
+        background-color: #1a73e8;
+        bottom: -1px;
+        width: 0%;
+        transition: all 0.3s ease;
+        transform-origin: left;
+    }
+
+    a:hover::after {
+        left: 0;
+        width: 100%;
+    }
+
+    a:not(:hover)::after {
+        right: 0;
+        width: 0%;
+    }
+
+    .btns {
+        display: flex;
+        justify-content: space-between;
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-lg);
+    }
+
+    #crtBtn {
+        background-color: transparent;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        padding: var(--spacing-sm) 0.875rem;
+        /* 14px to rem */
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        transition: all 0.5s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    #nxtBtn {
+        background-color: var(--primary-color);
+        padding: var(--spacing-sm) 1.5rem;
+        /* 24px to rem */
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        font-size: 0.9rem;
+        border: none;
+        color: #fff;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .signIn {
+        background-color: var(--primary-color);
+        padding: var(--spacing-sm) 1.5rem;
+        /* 24px to rem */
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        font-size: 0.9rem;
+        border: none;
+        color: #fff;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .signIn:hover {
+        background-color: #1557b0;
+        transform: scale(1.05);
+    }
+
+    #goBack {
+        background-color: transparent;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        padding: var(--spacing-sm) 0.875rem;
+        /* 14px to rem */
+        border-radius: 0.3125rem;
+        /* 5px to rem */
+        border: none;
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+
+    #goBack:hover {
+        background-color: #1e1e1e10;
+    }
+
+    #nxtBtn:hover {
+        background-color: #1557b0;
+        transform: scale(1.05);
+    }
+
+    #crtBtn:hover {
+        background-color: #1e1e1e10;
+    }
+
+    .logo {
+        font-family: var(--font-family);
+        font-size: 2rem;
+        font-weight: 500;
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 2.1875rem;
+        /* 35px to rem */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: var(--spacing-xl);
+        padding: var(--spacing-sm);
+        width: 3rem;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        margin: auto;
+    }
+
+    .logo.active {
+        width: 90%;
+        justify-content: space-between;
+    }
+
+    .logo img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .logo p {
+        display: none;
+        margin-right: 0.75rem;
+        /* 12px to rem */
+        padding: 0.25rem 0.75rem;
+        /* 4px 12px to rem */
+        font-family: var(--font-family);
+        font-size: var(--font-size-md);
+        font-weight: 400;
+        color: #fff;
+        background-color: var(--bg-secondary);
+        /* use a token instead of raw #f1f3f4 */
+        border: 1px solid var(--border-color);
+        border-radius: 62.4375rem;
+        /* 999px to rem */
+        height: auto;
+        /* allow flexible height */
+        line-height: 1.4;
+        background-color: var(--primary-color);
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .logo.active p {
+        display: flex;
+    }
+
+    .privacy-text {
+        color: var(--text-secondary) !important;
+        font-size: var(--font-size-md);
+        font-weight: 350;
+        position: relative;
+        top: var(--spacing-lg);
+        left: var(--spacing-lg);
+        width: 90%;
+    }
+
+    .privacy-link {
+        font-family: var(--font-family);
+        font-size: var(--font-size-md);
+        color: var(--primary-color);
+        white-space: wrap;
+        margin: 0;
+        top: -0.3125rem;
+        left: 0;
+    }
+
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+
+        20% {
+            transform: translateX(-0.3125rem);
+            /* -5px to rem */
+        }
+
+        40% {
+            transform: translateX(0.3125rem);
+            /* 5px to rem */
+        }
+
+        60% {
+            transform: translateX(-0.3125rem);
+            /* -5px to rem */
+        }
+
+        80% {
+            transform: translateX(0.3125rem);
+            /* 5px to rem */
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    .passWord i{
+        position: absolute;
+        right: 1.875rem;
+        /* 30px to rem */
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .shake {
+        animation: shake 0.2s ease-in-out;
+    }
+
+    /* Height-focused responsive adjustments */
+    
+    /* Large screens - more breathing room */
+    @media (min-height: 900px) {
+        .general {
+            min-height: 50vh;
+            padding: var(--spacing-xl);
+        }
+        
+        .logo {
+            margin-bottom: calc(var(--spacing-xl) * 1.5);
+            height: 4rem;
+        }
+        
+        .eMail, .passWord {
+            margin-top: calc(var(--spacing-lg) * 1.5);
+        }
+        
+        .btns {
+            margin-top: calc(var(--spacing-lg) * 1.5);
+            padding: calc(var(--spacing-lg) * 1.5);
+        }
+        
+        .privacy-text {
+            top: calc(var(--spacing-lg) * 1.5);
+        }
+    }
+
+    /* Standard height screens */
+    @media (max-height: 800px) and (min-height: 600px) {
+        .general {
+            min-height: 60vh;
+            padding: var(--spacing-md);
+        }
+        
+        .logo {
+            margin-bottom: var(--spacing-lg);
+            height: 3rem;
+        }
+    }
+
+    /* Medium height screens - compact layout */
+    @media (max-height: 600px) {
+        body {
+            padding: 0.5rem;
+        }
+        
+        .general {
+            min-height: 75vh;
+            padding: var(--spacing-sm);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            height: 2.5rem;
+        }
+        
+        .eMail, .passWord {
+            margin-top: var(--spacing-md);
+        }
+        
+        #emailInp, #passInp {
+            height: 2.8rem;
+        }
+        
+        .btns {
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-md);
+        }
+        
+        .privacy-text {
+            top: var(--spacing-md);
+            font-size: calc(var(--font-size-md) * 0.9);
+        }
+    }
+
+    /* Short screens - very compact */
+    @media (max-height: 500px) {
+        body {
+            padding: 0.25rem;
+        }
+        
+        .general {
+            min-height: 85vh;
+            padding: var(--spacing-xs);
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+            height: 2rem;
+        }
+        
+        .eMail, .passWord {
+            margin-top: var(--spacing-sm);
+        }
+        
+        #emailInp, #passInp {
+            height: 2.5rem;
+            font-size: calc(var(--font-size-md) * 0.9);
+        }
+        
+        .btns {
+            margin-top: var(--spacing-sm);
+            padding: var(--spacing-sm);
+        }
+        
+        #crtBtn, #nxtBtn, .signIn, #goBack {
+            padding: calc(var(--spacing-sm) * 0.8) 1rem;
+            font-size: calc(var(--font-size-md) * 0.9);
+        }
+        
+        .privacy-text {
+            top: var(--spacing-sm);
+            font-size: calc(var(--font-size-md) * 0.85);
+        }
+        
+        .placeHolder {
+            font-size: calc(1rem * 0.9);
+        }
+    }
+
+    /* Very short screens - ultra compact */
+    @media (max-height: 400px) {
+        body {
+            padding: 0.125rem;
+        }
+        
+        .general {
+            min-height: 95vh;
+            padding: 0.25rem;
+        }
+        
+        .logo {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            height: 1.5rem;
+        }
+        
+        .eMail, .passWord {
+            margin-top: 0.375rem;
+        }
+        
+        #emailInp, #passInp {
+            height: 2.25rem;
+            font-size: 0.75rem;
+            padding: 0.375rem;
+        }
+        
+        .btns {
+            margin-top: 0.375rem;
+            padding: 0.375rem;
+        }
+        
+        #crtBtn, #nxtBtn, .signIn, #goBack {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+            min-height: 2rem;
+        }
+        
+        .privacy-text {
+            top: 0.375rem;
+            font-size: 0.7rem;
+        }
+        
+        .placeHolder {
+            font-size: 0.8rem;
+        }
+        
+        a {
+            font-size: 0.75rem;
+        }
+    }
+
+    /* Landscape orientation adjustments */
+    @media (orientation: landscape) and (max-height: 500px) {
+        .general {
+            min-height: 90vh;
+        }
+        
+        .logo {
+            margin-bottom: 0.5rem;
+        }
+        
+        .eMail, .passWord {
+            margin-top: 0.75rem;
+        }
+        
+        .btns {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+        }
+    }
+
+    /* Existing width-based responsive adjustments (unchanged) */
+    @media (max-width: 768px) {
+        .btns {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            gap: 0.75rem;
+        }
+
+        #crtBtn,
+        #nxtBtn,
+        .signIn,
+        #goBack {
+            width: 100%;
+            padding: 0.75rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #emailInp,
+        #passInp {
+            height: 3rem;
+        }
+    }
+
+    /* Ultra-small screens (320px and below) */
+    @media (max-width: 411px) {
+        .btns {
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        .btn {
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        #crtBtn,
+        #nxtBtn,
+        .signIn,
+        #goBack {
+            width: 100%;
+            padding: 0.625rem;
+            font-size: 14px;
+            min-height: 2.5rem;
+        }
+
+        /* Adjust any text elements */
+        h1,
+        h2,
+        h3 {
+            font-size: 1.1rem;
+        }
+
+        p,
+        span,
+        label {
+            font-size: 12px;
+        }
+
+        /* Ensure touch targets are accessible */
+        button,
+        input,
+        a {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .logo.active {
+            gap: 0.5rem;
+        }
+    }
